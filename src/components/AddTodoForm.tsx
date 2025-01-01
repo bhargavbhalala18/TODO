@@ -1,16 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import {
   add_title,
   completed_task_count_title,
   input_task_placeholder,
 } from "../utils/constant";
+import { TodoItem } from "./TodoTable";
 
 interface AddTodoFormProps {
   onAdd: (text: string) => void;
-  completedCount: number;
+  todos: TodoItem[];
 }
 
-const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, completedCount }) => {
+const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, todos }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -30,6 +31,11 @@ const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, completedCount }) => {
       }
     }
   };
+
+  const completedCount = useMemo(
+    () => todos.filter((todo) => todo.completed).length,
+    [todos]
+  );
 
   return (
     <>

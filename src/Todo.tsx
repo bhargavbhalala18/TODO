@@ -1,4 +1,4 @@
-import React, { useReducer, useMemo, useCallback } from "react";
+import React, { useReducer, useCallback } from "react";
 import TodoTable, { TodoItem } from "./components/TodoTable";
 import AddTodoForm from "./components/AddTodoForm";
 import { ActionTypes, todo_app_title } from "./utils/constant";
@@ -41,15 +41,10 @@ const Todo: React.FC = () => {
     dispatch({ type: ActionTypes.TOGGLE_COMPLETE, id });
   }, []);
 
-  const completedCount = useMemo(
-    () => todos.filter((todo) => todo.completed).length,
-    [todos]
-  );
-
   return (
     <>
       <h1>{todo_app_title}</h1>
-      <AddTodoForm onAdd={handleAddTodo} completedCount={completedCount} />
+      <AddTodoForm onAdd={handleAddTodo} todos={todos} />
       <TodoTable
         todos={todos}
         onDelete={handleDeleteTodo}

@@ -40,8 +40,20 @@ const TodoTable: React.FC<TodoTableProps> = ({
         {todos.map((todo) => (
           <tr key={todo.id}>
             <td>{todo.id}</td>
-            <td>{todo.text}</td>
-            <td>{todo.completed ? status_completed : status_pending}</td>
+            <td
+              style={{
+                textDecoration: todo.completed ? "line-through" : "none",
+              }}
+            >
+              {todo.text}
+            </td>
+            <td
+              style={{
+                color: todo.completed ? "green" : "initial",
+              }}
+            >
+              {todo.completed ? status_completed : status_pending}
+            </td>
             <td>
               <button
                 onClick={() => onToggleComplete(todo.id)}
