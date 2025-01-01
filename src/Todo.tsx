@@ -1,11 +1,7 @@
 import React, { useReducer, useMemo, useCallback } from "react";
 import TodoTable, { TodoItem } from "./components/TodoTable";
 import AddTodoForm from "./components/AddTodoForm";
-import {
-  ActionTypes,
-  completed_task_count_title,
-  todo_app_title,
-} from "./utils/constant";
+import { ActionTypes, todo_app_title } from "./utils/constant";
 
 type TodoAction =
   | { type: typeof ActionTypes.ADD; text: string }
@@ -53,10 +49,7 @@ const Todo: React.FC = () => {
   return (
     <>
       <h1>{todo_app_title}</h1>
-      <p>
-        {completed_task_count_title}: {completedCount}
-      </p>
-      <AddTodoForm onAdd={handleAddTodo} />
+      <AddTodoForm onAdd={handleAddTodo} completedCount={completedCount} />
       <TodoTable
         todos={todos}
         onDelete={handleDeleteTodo}
