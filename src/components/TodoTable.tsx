@@ -1,4 +1,13 @@
 import React from "react";
+import {
+  complete_title,
+  delete_title,
+  status_completed,
+  status_pending,
+  table_id,
+  table_status,
+  table_task,
+} from "../utils/constant";
 
 export interface TodoItem {
   id: number;
@@ -21,10 +30,10 @@ const TodoTable: React.FC<TodoTableProps> = ({
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Task</th>
-          <th>Status</th>
-          <th>Actions</th>
+          <th>{table_id}</th>
+          <th>{table_task}</th>
+          <th>{table_status}</th>
+          <th>{table_task}</th>
         </tr>
       </thead>
       <tbody>
@@ -32,16 +41,16 @@ const TodoTable: React.FC<TodoTableProps> = ({
           <tr key={todo.id}>
             <td>{todo.id}</td>
             <td>{todo.text}</td>
-            <td>{todo.completed ? "Completed" : "Pending"}</td>
+            <td>{todo.completed ? status_completed : status_pending}</td>
             <td>
               <button
                 onClick={() => onToggleComplete(todo.id)}
                 disabled={todo.completed}
                 style={{ marginRight: "10px" }}
               >
-                Complete
+                {complete_title}
               </button>
-              <button onClick={() => onDelete(todo.id)}>Delete</button>
+              <button onClick={() => onDelete(todo.id)}>{delete_title}</button>
             </td>
           </tr>
         ))}

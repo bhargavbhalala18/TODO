@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import { add_title, input_task_placeholder } from "../utils/constant";
 
 interface AddTodoFormProps {
   onAdd: (text: string) => void;
 }
 
 const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd }) => {
-  const [text, setText] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (text.trim()) {
-      onAdd(text.trim());
-      setText("");
+    if (inputRef.current) {
+      const text = inputRef.current.value.trim();
+      if (text) {
+        onAdd(text);
+        inputRef.current.value = "";
+      }
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Add a new task"
-      />
-      <button type="submit">Add</button>
+      <input type="text" ref={inputRef} placeholder={input_task_placeholder} />
+      <button type="submit">{add_title}</button>
     </form>
   );
 };
