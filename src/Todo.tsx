@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "./store";
 import TodoTable from "./components/TodoTable";
@@ -10,17 +10,17 @@ const Todo: React.FC = () => {
   const todos = useSelector((state: RootState) => state.todos);
   const dispatch: AppDispatch = useDispatch();
 
-  const handleAddTodo = (text: string) => {
+  const handleAddTodo = useCallback((text: string) => {
     dispatch(addTodo(text));
-  };
+  }, []);
 
-  const handleDeleteTodo = (id: number) => {
+  const handleDeleteTodo = useCallback((id: number) => {
     dispatch(deleteTodo(id));
-  };
+  }, []);
 
-  const handleToggleComplete = (id: number) => {
+  const handleToggleComplete = useCallback((id: number) => {
     dispatch(toggleComplete(id));
-  };
+  }, []);
 
   return (
     <>
