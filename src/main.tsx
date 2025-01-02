@@ -2,9 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import Todo from "./ToDo";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Todo />
+    <Provider store={store}>
+      <Todo />
+    </Provider>
   </StrictMode>
 );
